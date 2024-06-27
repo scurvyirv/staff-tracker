@@ -1,4 +1,4 @@
-//this file handles updating db files by providing functions to add data, such as new employees, roles, and/or departments
+//this file handles updating db files by providing back end functions to add data, such as new employees, roles, and/or departments
 
 //import database connection
 const pool = require('./db.js');
@@ -14,6 +14,19 @@ async function addEmployeeToDatabase(firstName, lastName, roleId) {
         throw error;
     }
 };
+
+//3rd handles updating employeeRole
+async function updateEmployeeRoleToDatabase(employeeId, newRoleId) {
+    try {
+        const queryText = 'UPDATE employees SET role_id = $1 WHERE id = $2;';
+        const values = [newRoleId, employeeId];
+        await db.query(queryText, values);
+    } catch (error) {
+        console.error("Error updating employee's role in the database", error);
+        throw error;
+    }
+};
+
 
 //5th handles updating database when adding new role
 async function addRoleToDatabase(title, departmentId, salary) {
@@ -39,7 +52,10 @@ async function addDepartmentToDatabase(department_name) {
     }
 };
 
-
+//export functions wherever you want to call them
 module.exports = {
     addEmployeeToDatabase,
+    updateEmployeeRoleToDatabase,
+    addRoleToDatabase,
+    addDepartmentToDatabase
 };

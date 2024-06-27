@@ -5,17 +5,17 @@ const inquirer = require('inquirer');
 const pool = require('./db.js');
 
 //function to interact with database (takes a sql statement and pass an argument through it)
-const query = async (sql, args = []) => {
-    //connects to the database and stores that connection in 'client'
-    const client = await pool.connect()
-    try {
-        const result = await client.query(sql, args);
-        return result;
-    //this removes connection from database
-    } finally {
-        client.release();
-    }
-};
+// const query = async (sql, args = []) => {
+//     //connects to the database and stores that connection in 'client'
+//     const client = await pool.connect()
+//     try {
+//         const result = await client.query(sql, args);
+//         return result;
+//         //this removes connection from database
+//     } finally {
+//         client.release();
+//     }
+// };
 
 //this renders data named employeeData into the terminal from SQL db! 
 //now we need to manipulate it to render based on the option the user selects from our inquirer prompt
@@ -26,7 +26,7 @@ const query = async (sql, args = []) => {
 //     })
 
 //import options
-const { viewAllEmployees, AddEmployee, UpdateEmployeeRole, viewAllRoles, AddRole, viewAllDepartments, AddDepartment, Quit  } = require('./lib/options');
+const { viewAllEmployees, addEmployee, updateEmployeeRole, viewAllRoles, addRole, viewAllDepartments, addDepartment } = require('./lib/options');
 console.log('hello')
 //this will prompt questions on what company would like to do
 inquirer
@@ -48,7 +48,7 @@ inquirer
         }
     ])
     .then((response) => {
-        // this is an instantiation of each option selected from the terminal 
+        // this is an instantiation of each choice 
         let newOption;
         switch (response.option) {
             case "View All Employees":
@@ -56,26 +56,29 @@ inquirer
                 viewAllEmployees();
                 break;
             case "Add Employee":
-                newOption = new AddEmployee();
+                addEmployee();
                 break;
             case "Update Employee Role":
-                newOption = new UpdateEmployeeRole();
+                updateEmployeeRole();
                 break;
             case "View All Roles":
                 viewAllRoles();
                 break;
             case "Add Role":
-                newOption = new AddRole();
+                addRole();
                 break;
-            case "ViewAllDepartments":
+            case "View All Departments":
                 viewAllDepartments();
                 break;
             case "Add Department":
-                newOption = new AddDepartment();
+                addDepartment();
                 break;
             case "Quit":
-                newOption = new Quit();
+                console.log("Exiting the application...");
+                process.exit(0); // Exit the application
                 break;
+            default:
+                console.log("Invalid option selected.");
         }
     })
 
@@ -83,4 +86,4 @@ inquirer
         console.log(error)
     });
 
-    //don't export anything from this file pls to prevent circular logic/infinite loop
+//don't export anything from this file pls to prevent circular logic/infinite loop
