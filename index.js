@@ -1,4 +1,4 @@
-//front end
+//front end; this file handles the primary inquirer prompt the user sees to provide various options to organize company data
 const inquirer = require('inquirer');
 
 //import connection to database
@@ -17,74 +17,70 @@ const query = async (sql, args = []) => {
     }
 };
 
-query('SELECT * FROM employees;')
-    .then(({rows}) => {
-        const employeeData = rows
-        console.log(employeeData)
-    })
-
-// //import options
-// const { ViewAllEmployees, AddEmployee, UpdateEmployeeRole, ViewAllRoles, AddRole, ViewAllDepartments, AddDepartment, Quit  } = require('./lib/options');
-
-// //this will prompt questions on what company would like to do
-// inquirer
-//     .prompt([
-//         {
-//             type: "list",
-//             message: "what would you like to do?",
-//             name: "option",
-//             options: [
-//                 "View All Employees",
-//                 "Add Employee",
-//                 "Update Employee Role",
-//                 "View All Roles",
-//                 "Add Role",
-//                 "View All Departments",
-//                 "Add Department",
-//                 "Quit"
-//             ]
-//         }
-//     ])
-//     .then((response) => {
-//         // this is an instantiation of each option selected from the terminal 
-//         let newOption;
-//         switch (response.option) {
-//             case "View All Employees":
-//                 newOption = new ViewAllEmployees();
-//                 break;
-//             case "Add Employee":
-//                 newOption = new AddEmployee();
-//                 break;
-//             case "Update Employee Role":
-//                 newOption = new UpdateEmployeeRole();
-//                 break;
-//             case "View All Roles":
-//                 newOption = new ViewAllRoles();
-//                 break;
-//             case "Add Role":
-//                 newOption = new AddRole();
-//                 break;
-//             case "ViewAllDepartments":
-//                 newOption = new ViewAllDepartments();
-//                 break;
-//             case "Add Department":
-//                 newOption = new AddDepartment();
-//                 break;
-//             case "Quit":
-//                 newOption = new Quit();
-//                 break;
-//         }
-
-//         // invoke the methods from shape class
-//         newOption.setChoice(response.option);
-
-//         // invoke SVG logic into terminal (is this where we render SQL data?)
-//         // const renderedOption = newOption.render();
-//         // console.log(renderedOption);
-
-
+//this renders data named employeeData into the terminal from SQL db! 
+//now we need to manipulate it to render based on the option the user selects from our inquirer prompt
+// query('SELECT * FROM employees;')
+//     .then(({rows}) => {
+//         const employeeData = rows
+//         console.log(employeeData)
 //     })
 
-//     .catch((error) => {
-//         console.log(error)
-//     });
+//import options
+const { viewAllEmployees, AddEmployee, UpdateEmployeeRole, viewAllRoles, AddRole, viewAllDepartments, AddDepartment, Quit  } = require('./lib/options');
+console.log('hello')
+//this will prompt questions on what company would like to do
+inquirer
+    .prompt([
+        {
+            type: "list",
+            message: "what would you like to do?",
+            name: "option",
+            choices: [
+                "View All Employees",
+                "Add Employee",
+                "Update Employee Role",
+                "View All Roles",
+                "Add Role",
+                "View All Departments",
+                "Add Department",
+                "Quit"
+            ]
+        }
+    ])
+    .then((response) => {
+        // this is an instantiation of each option selected from the terminal 
+        let newOption;
+        switch (response.option) {
+            case "View All Employees":
+                // newOption = new ViewAllEmployees();
+                viewAllEmployees();
+                break;
+            case "Add Employee":
+                newOption = new AddEmployee();
+                break;
+            case "Update Employee Role":
+                newOption = new UpdateEmployeeRole();
+                break;
+            case "View All Roles":
+                viewAllRoles();
+                break;
+            case "Add Role":
+                newOption = new AddRole();
+                break;
+            case "ViewAllDepartments":
+                viewAllDepartments();
+                break;
+            case "Add Department":
+                newOption = new AddDepartment();
+                break;
+            case "Quit":
+                newOption = new Quit();
+                break;
+        }
+    })
+
+    .catch((error) => {
+        console.log(error)
+    });
+
+    //don't export anything from this file pls to prevent circular logic/infinite loop
