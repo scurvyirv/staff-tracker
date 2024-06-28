@@ -13,7 +13,7 @@ StaffTracker lets companies view, organize and assign departments, employees, an
     - schema.sql
     - seeds.sql
 - lib
-    -options.js
+    - options.js
 - node modules
 - index.js
 - db.js
