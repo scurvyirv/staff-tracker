@@ -3,7 +3,7 @@
 
 ## Description
 
-StaffTracker lets companies view, organize and assign departments, employees, and roles to centralize business planning and development. Using SQL, Postgres, and node.JS, StaffTracker organizes your company with ease. 
+StaffTracker lets companies view, organize and assign departments, employees, and roles to centralize business planning and development. Using SQL, Postgres, and Node JS, you will manage your company with ease!
 
 
 ## Table of Contents
@@ -16,7 +16,6 @@ StaffTracker lets companies view, organize and assign departments, employees, an
     -options.js
 - node modules
 - index.js
-- database.js
 - db.js
 - license
 - package-lock.json
@@ -32,20 +31,21 @@ StaffTracker lets companies view, organize and assign departments, employees, an
 
 
 ## Usage
-Here is a sample image of what data you can view:
-![sample image from the terminal](./lib/images/Screenshot%202024-06-10%20at%2010.24.11 PM.png)
+Here is a sample image of various tables you can generate:
+![sample tables generated from StaffTracker](./images/STrackSS.png)
 
 
 ## Links
-- Video Usage [link to video](https://youtu.be/baN4NHY6go8): https://youtu.be/baN4NHY6go8  
-- Deployed Webpage: https://scurvyirv.github.io/logo-stop/
-- GitHub Repo Page: https://github.com/scurvyirv/logo-stop.git
+- Video Usage [link to video](https://youtu.be/WF1X0kVQVD4): https://youtu.be/WF1X0kVQVD4
+- Deployed Webpage: https://scurvyirv.github.io/staff-tracker/
+- GitHub Repo Page: https://github.com/scurvyirv/staff-tracker
 
 
 ## Credits
 
 - Postgres package: https://www.npmjs.com/package/pg
 - Inquirer Package: https://www.npmjs.com/package/inquirer
+- Node JS Package: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm 
 
 
 ## License

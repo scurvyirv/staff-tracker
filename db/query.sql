@@ -12,7 +12,7 @@ FROM
 departments
 
 JOIN
-roles on departments.id = roles.department_id
+roles on departments.id = roles.department
 
 JOIN 
 employees on departments.id = employees.role_id
